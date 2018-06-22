@@ -38,6 +38,7 @@ How to build tensorflow on Windows in China with VS2017
         pause
         
 8.if you don't have VS2017, download it from www.visualstudio.com, VS2015 has a bug, cannot compile openssl.
+
 9.to test tensorflow with python, you need install python modules:
 
         set path=C:\tensorflow_tools\Anaconda3;%path%

@@ -1,3 +1,45 @@
+How to build tensorflow on Windows in China with VS2017
+======================================================
+0.you need VPN in China
+
+1.download tensorflow_master.zip
+
+2.download tools: bazel zip file for windows, msys2 for windows, anaconda3 for windows
+
+3.install msys2 in C:\XXX, assume it is C:\tensorflow_tools, bring up msys2 shell, and run "pacman -Syuu --noconfirm", and then "pacman -S --noconfirm unzip perl patch", result: C:\tensorflow_tools\msys64
+
+4.install anaconda3 in same folder as msys3, assume it is C:\tensorflow_tools, result: C:\tensorflow_tools\Anaconda3
+
+5.unzip bazel zip file to C:\tensorflow_tools
+
+6.unzip tensorflow_master.zip to a folder, assume it is D:\tf\tensorflow-master
+
+7.run following commands in cmd:
+        
+        set BAZEL_SH=C:\tensorflow_tools\msys64\usr\bin\bash
+        set PYTHON_DIRECTORY=tensorflow_tools\Anaconda3
+        set BAZEL_VC=C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC
+        if not exist C:\tools md C:\tools
+        if not exist C:\tools\bazel md C:\tools\bazel
+        if not exist C:\tools\bazel\bazel.exe copy C:\tensorflow_tools\bazel.exe C:\tools\bazel\bazel.exe
+        set path=C:\tools\bazel;%path%
+        set path=C:\tensorflow_tools\msys64\usr\bin;%path%
+        set path=C:\tensorflow_tools\Anaconda3;%path%
+        set path=C:\tensorflow_tools\Anaconda3\Scripts;%path%
+        cd /d D:\tf\tensorflow-master
+        where git
+        where python
+        where bazel
+        where unzip
+        where perl
+        where patch
+        rem MUST use slash "/" path separator
+        %BAZEL_SH% -l %cd%/tensorflow/tools/ci_build/windows/cpu/pip/build_tf_windows.sh
+        pause
+        
+8.if you don't have VS2017, download it from www.visualstudio.com, VS2015 has a bug, cannot compile openssl.
+
+
 <div align="center">
   <img src="https://www.tensorflow.org/images/tf_logo_transp.png"><br><br>
 </div>
